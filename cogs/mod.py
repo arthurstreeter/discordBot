@@ -37,6 +37,7 @@ class Moderator(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
+    @commands.has_role("HOMIES")
     @permissions.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason: str = None):
         """ Kicks a user from the current server. """
@@ -51,6 +52,7 @@ class Moderator(commands.Cog):
 
     @commands.command(aliases=["nick"])
     @commands.guild_only()
+    @commands.has_role("HOMIES")
     @permissions.has_permissions(manage_nicknames=True)
     async def nickname(self, ctx, member: discord.Member, *, name: str = None):
         """ Nicknames a user from the current server. """
@@ -68,6 +70,7 @@ class Moderator(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
+    @commands.has_role("HOMIES")
     @permissions.has_permissions(ban_members=True)
     async def ban(self, ctx, member: MemberID, *, reason: str = None):
         """ Bans a user from the current server. """
@@ -83,6 +86,7 @@ class Moderator(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
+    @commands.has_role("HOMIES")
     @commands.max_concurrency(1, per=commands.BucketType.user)
     @permissions.has_permissions(ban_members=True)
     async def massban(self, ctx, reason: ActionReason, *members: MemberID):
@@ -96,6 +100,7 @@ class Moderator(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
+    @commands.has_role("HOMIES")
     @permissions.has_permissions(ban_members=True)
     async def unban(self, ctx, member: MemberID, *, reason: str = None):
         """ Unbans a user from the current server. """
@@ -107,6 +112,7 @@ class Moderator(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
+    @commands.has_role("HOMIES")
     @permissions.has_permissions(manage_roles=True)
     async def mute(self, ctx, member: discord.Member, *, reason: str = None):
         """ Mutes a user from the current server. """
@@ -126,6 +132,7 @@ class Moderator(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
+    @commands.has_role("HOMIES")
     @permissions.has_permissions(manage_roles=True)
     async def unmute(self, ctx, member: discord.Member, *, reason: str = None):
         """ Unmutes a user from the current server. """
@@ -145,6 +152,7 @@ class Moderator(commands.Cog):
 
     @commands.command(aliases=["ar"])
     @commands.guild_only()
+    @commands.has_role("HOMIES")
     @permissions.has_permissions(manage_roles=True)
     async def announcerole(self, ctx, *, role: discord.Role):
         """ Makes a role mentionable and removes it whenever you mention the role """
@@ -181,6 +189,7 @@ class Moderator(commands.Cog):
 
     @commands.group()
     @commands.guild_only()
+    @commands.has_role("HOMIES")
     @permissions.has_permissions(ban_members=True)
     async def find(self, ctx):
         """ Finds a user within your search term """
@@ -233,6 +242,7 @@ class Moderator(commands.Cog):
 
     @commands.group()
     @commands.guild_only()
+    @commands.has_role("HOMIES")
     @commands.max_concurrency(1, per=commands.BucketType.guild)
     @permissions.has_permissions(manage_messages=True)
     async def prune(self, ctx):
@@ -263,40 +273,40 @@ class Moderator(commands.Cog):
         if message is True:
             await ctx.send(f'🚮 Successfully removed {deleted} message{"" if deleted == 1 else "s"}.')
 
-    @prune.command()
-    async def embeds(self, ctx, search=100):
-        """Removes messages that have embeds in them."""
-        await self.do_removal(ctx, search, lambda e: len(e.embeds))
+    # @prune.command()
+    # async def embeds(self, ctx, search=100):
+    #     """Removes messages that have embeds in them."""
+    #     await self.do_removal(ctx, search, lambda e: len(e.embeds))
 
-    @prune.command()
-    async def files(self, ctx, search=100):
-        """Removes messages that have attachments in them."""
-        await self.do_removal(ctx, search, lambda e: len(e.attachments))
+    # @prune.command()
+    # async def files(self, ctx, search=100):
+    #     """Removes messages that have attachments in them."""
+    #     await self.do_removal(ctx, search, lambda e: len(e.attachments))
 
-    @prune.command()
-    async def mentions(self, ctx, search=100):
-        """Removes messages that have mentions in them."""
-        await self.do_removal(ctx, search, lambda e: len(e.mentions) or len(e.role_mentions))
+    # @prune.command()
+    # async def mentions(self, ctx, search=100):
+    #     """Removes messages that have mentions in them."""
+    #     await self.do_removal(ctx, search, lambda e: len(e.mentions) or len(e.role_mentions))
 
-    @prune.command()
-    async def images(self, ctx, search=100):
-        """Removes messages that have embeds or attachments."""
-        await self.do_removal(ctx, search, lambda e: len(e.embeds) or len(e.attachments))
+    # @prune.command()
+    # async def images(self, ctx, search=100):
+    #     """Removes messages that have embeds or attachments."""
+    #     await self.do_removal(ctx, search, lambda e: len(e.embeds) or len(e.attachments))
 
-    @prune.command(name='all')
-    async def _remove_all(self, ctx, search=100):
-        """Removes all messages."""
+    @prune.command(name='ten')
+    async def _remove_ten(self, ctx, search=10):
+        """Removes Past 10 messages."""
         await self.do_removal(ctx, search, lambda e: True)
 
     @prune.command()
-    async def user(self, ctx, member: discord.Member, search=100):
-        """Removes all messages by the member."""
+    async def user(self, ctx, member: discord.Member, search=10):
+        f"""Removes all messages by the member. (Searches past {search} messages)"""
         await self.do_removal(ctx, search, lambda e: e.author == member)
 
     @prune.command()
     async def contains(self, ctx, *, substr: str):
-        """Removes all messages containing a substring.
-        The substring must be at least 3 characters long.
+        f"""Removes all messages containing a substring.
+        The substring must be at least 3 characters long. (Searches past {search} messages)
         """
         if len(substr) < 3:
             await ctx.send('The substring length must be at least 3 characters.')
@@ -314,39 +324,39 @@ class Moderator(commands.Cog):
 
         await self.do_removal(ctx, search, predicate)
 
-    @prune.command(name='users')
-    async def _users(self, ctx, prefix=None, search=100):
-        """Removes only user messages. """
+    # @prune.command(name='users')
+    # async def _users(self, ctx, prefix=None, search=100):
+    #     """Removes only user messages. """
 
-        def predicate(m):
-            return m.author.bot is False
+    #     def predicate(m):
+    #         return m.author.bot is False
 
-        await self.do_removal(ctx, search, predicate)
+    #     await self.do_removal(ctx, search, predicate)
 
-    @prune.command(name='emojis')
-    async def _emojis(self, ctx, search=100):
-        """Removes all messages containing custom emoji."""
-        custom_emoji = re.compile(r'<a?:(.*?):(\d{17,21})>|[\u263a-\U0001f645]')
+    # @prune.command(name='emojis')
+    # async def _emojis(self, ctx, search=100):
+    #     """Removes all messages containing custom emoji."""
+    #     custom_emoji = re.compile(r'<a?:(.*?):(\d{17,21})>|[\u263a-\U0001f645]')
 
-        def predicate(m):
-            return custom_emoji.search(m.content)
+    #     def predicate(m):
+    #         return custom_emoji.search(m.content)
 
-        await self.do_removal(ctx, search, predicate)
+    #     await self.do_removal(ctx, search, predicate)
 
-    @prune.command(name='reactions')
-    async def _reactions(self, ctx, search=100):
-        """Removes all reactions from messages that have them."""
+    # @prune.command(name='reactions')
+    # async def _reactions(self, ctx, search=100):
+    #     """Removes all reactions from messages that have them."""
 
-        if search > 2000:
-            return await ctx.send(f'Too many messages to search for ({search}/2000)')
+    #     if search > 2000:
+    #         return await ctx.send(f'Too many messages to search for ({search}/2000)')
 
-        total_reactions = 0
-        async for message in ctx.history(limit=search, before=ctx.message):
-            if len(message.reactions):
-                total_reactions += sum(r.count for r in message.reactions)
-                await message.clear_reactions()
+    #     total_reactions = 0
+    #     async for message in ctx.history(limit=search, before=ctx.message):
+    #         if len(message.reactions):
+    #             total_reactions += sum(r.count for r in message.reactions)
+    #             await message.clear_reactions()
 
-        await ctx.send(f'Successfully removed {total_reactions} reactions.')
+    #     await ctx.send(f'Successfully removed {total_reactions} reactions.')
 
 
 def setup(bot):

@@ -17,6 +17,7 @@ class Fun_Commands(commands.Cog):
         self.config = default.get("config.json")
 
     @commands.command(aliases=['8ball'])
+    @commands.has_role("HOMIES")
     async def eightball(self, ctx, *, question: commands.clean_content):
         """ Consult 8ball to receive an answer """
         answer = random.choice(lists.ballresponse)
@@ -44,42 +45,49 @@ class Fun_Commands(commands.Cog):
             await ctx.send(content=content, file=discord.File(bio, filename=filename))
 
     @commands.command()
+    @commands.has_role("HOMIES")
     @commands.cooldown(rate=1, per=1.5, type=commands.BucketType.user)
     async def cat(self, ctx):
         """ Posts a random cat """
         await self.randomimageapi(ctx, 'https://api.alexflipnote.dev/cats', 'file')
 
     @commands.command()
+    @commands.has_role("HOMIES")
     @commands.cooldown(rate=1, per=1.5, type=commands.BucketType.user)
     async def dog(self, ctx):
         """ Posts a random dog """
         await self.randomimageapi(ctx, 'https://api.alexflipnote.dev/dogs', 'file')
 
     @commands.command(aliases=["bird"])
+    @commands.has_role("HOMIES")
     @commands.cooldown(rate=1, per=1.5, type=commands.BucketType.user)
     async def birb(self, ctx):
         """ Posts a random birb """
         await self.randomimageapi(ctx, 'https://api.alexflipnote.dev/birb', 'file')
 
     @commands.command()
+    @commands.has_role("HOMIES")
     @commands.cooldown(rate=1, per=1.5, type=commands.BucketType.user)
     async def duck(self, ctx):
         """ Posts a random duck """
         await self.randomimageapi(ctx, 'https://random-d.uk/api/v1/random', 'url')
 
     @commands.command()
+    @commands.has_role("HOMIES")
     @commands.cooldown(rate=1, per=1.5, type=commands.BucketType.user)
     async def coffee(self, ctx):
         """ Posts a random coffee """
         await self.randomimageapi(ctx, 'https://coffee.alexflipnote.dev/random.json', 'file')
 
     @commands.command(aliases=['flip', 'coin'])
+    @commands.has_role("HOMIES")
     async def coinflip(self, ctx):
         """ Coinflip! """
         coinsides = ['Heads', 'Tails']
         await ctx.send(f"**{ctx.author.name}** flipped a coin and got **{random.choice(coinsides)}**!")
 
     @commands.command()
+    @commands.has_role("HOMIES")
     async def f(self, ctx, *, text: commands.clean_content = None):
         """ Press F to pay respect """
         hearts = ['❤', '💛', '💚', '💙', '💜']
@@ -87,6 +95,7 @@ class Fun_Commands(commands.Cog):
         await ctx.send(f"**{ctx.author.name}** has paid their respect {reason}{random.choice(hearts)}")
 
     @commands.command()
+    @commands.has_role("HOMIES")
     async def supreme(self, ctx, *, text: commands.clean_content(fix_channel_mentions=True)):
         """ Make a fake Supreme logo
 
@@ -118,6 +127,7 @@ class Fun_Commands(commands.Cog):
         await self.api_img_creator(ctx, f"https://api.alexflipnote.dev/supreme?text={inputText}&{darkorlight}", "supreme.png")
 
     @commands.command(aliases=['color'])
+    @commands.has_role("HOMIES")
     @commands.cooldown(rate=1, per=3.0, type=commands.BucketType.user)
     async def colour(self, ctx, colour: str):
         """ View the colour HEX details """
@@ -153,6 +163,7 @@ class Fun_Commands(commands.Cog):
             await ctx.send(embed=embed, content=f"{ctx.invoked_with.title()} name: **{r['name']}**")
 
     @commands.command()
+    @commands.has_role("HOMIES")
     @commands.cooldown(rate=1, per=2.0, type=commands.BucketType.user)
     async def urban(self, ctx, *, search: commands.clean_content):
         """ Find the 'best' definition to your words """
@@ -179,6 +190,7 @@ class Fun_Commands(commands.Cog):
             await ctx.send(f"📚 Definitions for **{result['word']}**```fix\n{definition}```")
 
     @commands.command()
+    @commands.has_role("HOMIES")
     async def reverse(self, ctx, *, text: str):
         """ !poow ,ffuts esreveR
         Everything you type after reverse will of course, be reversed
@@ -187,6 +199,7 @@ class Fun_Commands(commands.Cog):
         await ctx.send(f"🔁 {t_rev}")
 
     @commands.command()
+    @commands.has_role("HOMIES")
     async def password(self, ctx, nbytes: int = 18):
         """ Generates a random password string for you
 
@@ -200,12 +213,14 @@ class Fun_Commands(commands.Cog):
         await ctx.author.send(f"🎁 **Here is your password:**\n{secrets.token_urlsafe(nbytes)}")
 
     @commands.command()
+    @commands.has_role("HOMIES")
     async def rate(self, ctx, *, thing: commands.clean_content):
         """ Rates what you desire """
         rate_amount = random.uniform(0.0, 100.0)
         await ctx.send(f"I'd rate `{thing}` a **{round(rate_amount, 4)} / 100**")
 
     @commands.command()
+    @commands.has_role("HOMIES")
     async def beer(self, ctx, user: discord.Member = None, *, reason: commands.clean_content = ""):
         """ Give someone a beer! 🍻 """
         if not user or user.id == ctx.author.id:
@@ -238,6 +253,7 @@ class Fun_Commands(commands.Cog):
             await msg.edit(content=beer_offer)
 
     @commands.command(aliases=['howhot', 'hot'])
+    @commands.has_role("HOMIES")
     async def hotcalc(self, ctx, *, user: discord.Member = None):
         """ Returns a random percent for how hot is a discord user """
         user = user or ctx.author
@@ -257,6 +273,7 @@ class Fun_Commands(commands.Cog):
         await ctx.send(f"**{user.name}** is **{hot:.2f}%** hot {emoji}")
 
     @commands.command(aliases=['noticemesenpai'])
+    @commands.has_role("HOMIES")
     async def noticeme(self, ctx):
         """ Notice me senpai! owo """
         if not permissions.can_upload(ctx):
@@ -266,6 +283,7 @@ class Fun_Commands(commands.Cog):
         await ctx.send(file=discord.File(bio, filename="noticeme.gif"))
 
     @commands.command(aliases=['slots', 'bet'])
+    @commands.has_role("HOMIES")
     @commands.cooldown(rate=1, per=3.0, type=commands.BucketType.user)
     async def slot(self, ctx):
         """ Roll the slot machine """
