@@ -1,0 +1,69 @@
+{
+    "users": {
+        "Zero-PAiN": {
+            "rating": 6,
+            "comments": [],
+            "nicks": []
+        },
+        "Jonston": {
+            "rating": 1,
+            "comments": [],
+            "nicks": []
+        },
+        "biggypanks": {
+            "rating": 3,
+            "comments": [],
+            "nicks": []
+        },
+        "SCOTT": {
+            "rating": 41,
+            "comments": [],
+            "nicks": []
+        },
+        "Lucky": {
+            "rating": 3,
+            "comments": [],
+            "nicks": []
+        },
+        "Mr.GGs": {
+            "rating": 4,
+            "comments": [],
+            "nicks": []
+        },
+        "Ronald": {
+            "rating": 1,
+            "comments": [],
+            "nicks": []
+        },
+        "Hippo": {
+            "rating": 1,
+            "comments": [],
+            "nicks": []
+        },
+        "Mojo": {
+            "rating": 2,
+            "comments": [],
+            "nicks": []
+        }
+    },
+    "raters": {
+        "Zero-PAiN": {
+            "Mojo": "09/29/2020, 19:44:20"
+        },
+        "biggypanks": {
+            "SCOTT": "09/29/2020, 10:07:35"
+        },
+        "Jonston": {
+            "Mr.GGs": "09/29/2020, 16:59:04"
+        },
+        "DirtyMag69": {
+            "SCOTT": "09/29/2020, 00:09:51"
+        },
+        "Mojo": {
+            "Zero-PAiN": "09/29/2020, 19:25:33"
+        },
+        "Hippo": {
+            "Zero-PAiN": "09/29/2020, 19:29:55"
+        }
+    }
+}

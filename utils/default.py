@@ -17,6 +17,16 @@ def get(file):
     except FileNotFoundError:
         raise FileNotFoundError("JSON file wasn't found")
 
+def load(file):
+    try:
+        with open(file, "r") as data_file:
+            return json.loads(data_file.read())
+    except:
+        print("Can't read file.")
+        
+def write(data, file):
+    with open(file, "w") as data_file:
+        data_file.write(json.dumps(data, indent=4))
 
 def traceback_maker(err, advance: bool = True):
     _traceback = ''.join(traceback.format_tb(err.__traceback__))
